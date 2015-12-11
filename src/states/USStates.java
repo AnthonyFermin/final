@@ -1,5 +1,6 @@
 package states;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class USStates {
@@ -15,8 +16,23 @@ public class USStates {
      *   with value 0.
      */
     public static Map<Character, Integer> countStatesByFirstLetter() {
-        // TODO: Write this method.
-        return null;
+        Map<Character, Integer> alphabetCount = new HashMap<Character, Integer>();
+        int initialLetter = (int) 'A';
+        for(int i = 0; i < 26; i++){
+            alphabetCount.put((char) (initialLetter + i), 0);
+        }
+
+        for(String state: STATE_NAMES){
+            char currentLetter = state.charAt(0);
+            int currentCount = alphabetCount.get(currentLetter);
+            if(currentCount > 0){
+                alphabetCount.put(currentLetter, currentCount + 1);
+            }else {
+                alphabetCount.put(currentLetter, 1);
+            }
+        }
+
+        return alphabetCount;
     }
 
     public static void main(String[] args) {
@@ -27,6 +43,8 @@ public class USStates {
         if (counts.get('A') != 4) throw new AssertionError();
         if (!counts.containsKey('B')) throw new AssertionError();
         if (counts.get('B') != 0) throw new AssertionError();
+        System.out.println(counts);
+        System.out.println("Success");
     }
 
     public static final String[] STATE_NAMES = {
