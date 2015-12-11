@@ -27,7 +27,6 @@ public class Abbreviate {
 
     public static String abbreviate(String string)
     {
-        // TODO: Write this method.
         StringBuilder abbreviated = new StringBuilder();
         for(char letter : string.toCharArray()){
             if(!VOWELS.contains(Character.toUpperCase(letter))){

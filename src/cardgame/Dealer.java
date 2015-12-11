@@ -50,7 +50,6 @@ public class Dealer {
      *   cards; the size of each hand is 'numCards'. No card is present more than once.
      */
     public static List<List<Card>> deal(int numPlayers, int numCards) {
-        // TODO: Finish this method as follows:
         // - Get a shuffled deck of cards.
         List<Card> deck = getShuffledDeck();
         // - Create a list of hands.

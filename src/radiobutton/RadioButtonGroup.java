@@ -1,5 +1,8 @@
 package radiobutton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Represents a group of "radio buttons": toggle buttons for which exactly one is selected
  * at a given time. If a different button is selected, the previously-selected button is
@@ -9,6 +12,10 @@ package radiobutton;
  * button group has 4 buttons, they are numbered 0, 1, 2, and 3.
  */
 public class RadioButtonGroup {
+
+    int           numButtons;
+    List<Boolean> buttons;
+    int selected;
 
     /**
      * Creates a group of radio buttons.
@@ -20,8 +27,15 @@ public class RadioButtonGroup {
      * @raise RuntimeException
      *   The initial button number is invalid.
      */
-    public RadioButtonGroup(int numButtons, int initial) {
-        // TODO: Implement this method.
+    public RadioButtonGroup(int numButtons, int initial)
+    {
+        this.numButtons = numButtons;
+        selected = initial;
+        buttons = new ArrayList<Boolean>();
+        for(int i = 0; i < numButtons; i++) {
+            buttons.add(false);
+        }
+        buttons.set(initial, true);
     }
 
     /**
@@ -39,7 +53,12 @@ public class RadioButtonGroup {
      *   The button number is invalid.
      */
     public void select(int button) {
-        // TODO: Implement this method.
+        if(button > numButtons || button < 0) {
+            throw new RuntimeException();
+        }
+        buttons.set(selected, false);
+        buttons.set(button, true);
+        selected = button;
     }
 
     /**
@@ -50,10 +69,37 @@ public class RadioButtonGroup {
      *   The button number is invalid.
      */
     public boolean isSelected(int button) {
-        // TODO: Implement this method.
-        return false;
+        return buttons.get(button);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder("Selected: " + selected + " - ");
+        for(int i = 0; i < numButtons; i++) {
+            if(buttons.get(i)) {
+                stringBuilder.append(" ____ ");
+            } else {
+                stringBuilder.append(" / " + i + " \\ ");
+            }
+        }
+        return stringBuilder.append("\n").toString();
     }
 
     // TODO: Add attributes and helper methods as needed.
+
+    public static void main(String[] args)
+    {
+        RadioButtonGroup myButtons = new RadioButtonGroup(4, 2);
+        System.out.println(myButtons);
+        myButtons.select(0);
+        System.out.println(myButtons);
+        myButtons.select(1);
+        System.out.println(myButtons);
+        myButtons.select(3);
+        System.out.println(myButtons);
+
+        //should throw RuntimeException
+        myButtons.select(8);
+    }
 
 }
