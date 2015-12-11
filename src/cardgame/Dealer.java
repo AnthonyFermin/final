@@ -52,13 +52,22 @@ public class Dealer {
     public static List<List<Card>> deal(int numPlayers, int numCards) {
         // TODO: Finish this method as follows:
         // - Get a shuffled deck of cards.
+        List<Card> deck = getShuffledDeck();
         // - Create a list of hands.
+        List<List<Card>> hands = new ArrayList<List<Card>>();
         // - For each hand,
         //   - Create a list of cards.
         //   - Add cards to the hand, removing them from the deck.
         //   - Add the hand to the list of hands.
+        for(int i = 0; i < numPlayers; i ++) {
+            List<Card> currentHand = new ArrayList<Card>();
+            for(int j = 0; j < numCards; j++) {
+                currentHand.add(deck.remove(deck.size() - 1));
+            }
+            hands.add(currentHand);
+        }
         // - Return the list of hands.
-        return null;
+        return hands;
     }
 
     public static void main(String[] args) {
