@@ -3,7 +3,7 @@ package strq;
 public class Test {
 
     public static void main(String[] args) {
-        StringQueue queue = null;  // FIXME: Use an instance of your SimpleStringQueue.
+        StringQueue queue = new SimpleStringQueue();
         queue.enqueue("Hello, world!");
         queue.enqueue("  ");
         queue.enqueue("This is a test.");
@@ -19,6 +19,8 @@ public class Test {
         s = queue.dequeue(21);
         if (queue.length() != 0) throw new AssertionError();
         if (!s.equals("is a test.  All done.")) throw new AssertionError();
+        System.out.println(queue);
+        System.out.println("Success");
     }
 
 }
